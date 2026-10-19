@@ -101,4 +101,4 @@ jobs:
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
           tag_name: ${{ needs.find.outputs.tag }}
           files: dist/*.apk
-          generate_release_notes: true
+          # generate_release_notes 对 fine-grained PAT 会 403，不启用
