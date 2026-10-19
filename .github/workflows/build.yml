@@ -12,6 +12,9 @@ name: Build TVBox APK
 on:
   schedule:
     - cron: '*/5 * * * *'
+  # push 到 main 立即巡检一次：补偿 schedule 首次注册/高峰期的触发延迟
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       tag:
