@@ -4,7 +4,7 @@
 
 ## 工作方式
 
-- 每 30 分钟巡检一次：发现「还没有 release 的 `v*` tag」就构建，APK 回发到该 tag 的 release；
+- 每 5 分钟巡检一次：发现「还没有 release 的 `v*` tag」就构建，APK 回发到该 tag 的 release；
 - 手动运行：填 tag 强制重建该 tag（release 资产同名覆盖）；不填则构建默认分支、仅产出 artifact（公共仓库 artifact 任何人可下载，注意）；
 - GitHub 会在仓库 60 天无活动后自动停用 schedule，长时间不发包时在 Actions 里手动跑一次即可保活。
 

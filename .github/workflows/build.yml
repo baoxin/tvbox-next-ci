@@ -11,7 +11,7 @@ name: Build TVBox APK
 # 仅授权 baoxin/TVBox-Next，权限 Contents: Read and write。
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
     inputs:
       tag:
