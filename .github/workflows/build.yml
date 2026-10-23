@@ -79,15 +79,19 @@ jobs:
       - name: Accept Android SDK licenses
         run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
-      - name: Build release + debug APK
+      # 双版本：proxy=代理版（/api/v1/tvbox，分片经 NAS 转发）
+      #         direct=直连版（/api/v0/tvbox，分片播放器直连上游）
+      - name: Build release + debug APKs (proxy & direct)
         working-directory: TVBox-Next
-        run: sh gradlew :app:assembleRelease :app:assembleDebug --no-daemon
+        run: sh gradlew :app:assembleProxyRelease :app:assembleProxyDebug :app:assembleDirectRelease :app:assembleDirectDebug --no-daemon
 
       - name: Rename APKs
         run: |
           mkdir -p dist
-          cp TVBox-Next/app/build/outputs/apk/java/release/*.apk dist/TVBox-release.apk
-          cp TVBox-Next/app/build/outputs/apk/java/debug/*.apk dist/TVBox-debug.apk
+          cp TVBox-Next/app/build/outputs/apk/proxy/release/*.apk  dist/TVBox-proxy.apk
+          cp TVBox-Next/app/build/outputs/apk/direct/release/*.apk dist/TVBox-direct.apk
+          cp TVBox-Next/app/build/outputs/apk/proxy/debug/*.apk    dist/TVBox-proxy-debug.apk
+          cp TVBox-Next/app/build/outputs/apk/direct/debug/*.apk   dist/TVBox-direct-debug.apk
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
